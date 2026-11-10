@@ -16,7 +16,7 @@
   </p>
 
   <a href="release/SoundUpSetup.exe">
-    <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_SOUNDUP-SETUP.EXE-2ea44f?style=for-the-badge&logo=windows&logoColor=white" height="42">
+    <img src="https://github.com/henrique-jfp/SoundUp/releases/latest/download/SoundUpSetup.exe" height="42">
   </a>
 
   <br/><br/>
