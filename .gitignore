@@ -1,0 +1,66 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# Driver and Signing Artifacts
+*.sys
+*.cat
+*.cer
+*.pfx
+*.inf.cat
+*.intermediate.manifest
+
+# WiX / MSI Output
+*.wixobj
+*.wixpdb
+*.msi
+*.msix
+*.appx
+
+# Build Outputs
+x64/
+x86/
+ARM64/
+Debug/
+Release/
+
+# Python / Legacy
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Release files intentionally included for the final distribution
+!legacy/dist/
+!legacy/dist/SoundUp.exe
+!release/
+!release/SoundUpSetup.exe
+!release/SoundUpSetup.msi
+
+# OS / Temporary
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*.log
+
+
+.build/
+release/
+legacy/dist/
+installer/wix/*.exe
