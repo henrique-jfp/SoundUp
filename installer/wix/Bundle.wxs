@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	  xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+	  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Bundle Name="SoundUp" Version="2.0.6.0" Manufacturer="SoundUp Technologies"
+		  IconSourceFile="$(var.SolutionDir)\installer\wix\soundup.ico"
+		  UpgradeCode="{D5E6F7A8-9B0C-4D1E-2F3A-4B5C6D7E8F90}">
+	<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+	  <bal:WixStandardBootstrapperApplication LicenseFile="license.rtf" />
+	</BootstrapperApplicationRef>
+	<util:RegistrySearch Id="EqualizerAPODetection"
+		Root="HKLM"
+		Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\EqualizerAPO"
+		Value="DisplayVersion"
+		Variable="EqualizerAPOVersion"
+		Win64="yes" />
+	<util:RegistrySearch Id="EqualizerAPODetection32"
+		Root="HKLM"
+		Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\EqualizerAPO"
+		Value="DisplayVersion"
+		Variable="EqualizerAPOVersion32"
+		Win64="no" />
+	<util:FileSearch Id="EqualizerAPOFileDetection"
+		Path="[ProgramFiles64Folder]EqualizerAPO\EqualizerAPO.dll"
+		Result="exists"
+		Variable="EqualizerAPOFileExists" />
+	<Chain>
+	  <ExePackage Id="EqualizerAPO"
+				  DisplayName="Equalizer APO (necessário para o SoundUp)"
+				  SourceFile="$(var.SolutionDir)\installer\wix\EqualizerAPO-x64-1.4.2.exe"
+				  PerMachine="yes"
+				  Vital="yes"
+				  InstallCondition="NOT EqualizerAPOVersion AND NOT EqualizerAPOVersion32 AND NOT EqualizerAPOFileExists" />
+	  <MsiPackage SourceFile="$(var.SolutionDir)\release\SoundUpSetup.msi"
+				  DisplayInternalUI="yes" Vital="yes" />
+	</Chain>
+  </Bundle>
+</Wix>

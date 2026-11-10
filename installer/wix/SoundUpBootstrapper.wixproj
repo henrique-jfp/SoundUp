@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+	<OutputName>SoundUpSetup</OutputName>
+	<OutputType>Bundle</OutputType>
+	<WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+	<WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+	<OutputPath>$(SolutionDir)release\</OutputPath>
+	<IntermediateOutputPath>$(SolutionDir)obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+	<Compile Include="Bundle.wxs" />
+	<WixExtension Include="WixBalExtension">
+	  <HintPath>$(WixExtDir)\WixBalExtension.dll</HintPath>
+	  <Name>WixBalExtension</Name>
+	</WixExtension>
+	<WixExtension Include="WixUtilExtension">
+	  <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+	  <Name>WixUtilExtension</Name>
+	</WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+	<Error Text="O WiX Toolset v3.11 ou superior é necessário para gerar o instalador." />
+  </Target>
+</Project>

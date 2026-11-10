@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     >
+
+  <Product Id="*"
+           Name="SoundUp Audio Amplifier"
+           Language="1046"
+           Version="2.0.6.0"
+           Manufacturer="SoundUp Technologies"
+           UpgradeCode="{8E2C4F6B-3A19-4C5E-B8D2-9F0A1B2C3D4E}">
+
+    <Package InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Platform="x64"
+             Comments="SoundUp - Pré-amplificador e Limitador Nativo para Windows 11" />
+
+    <MajorUpgrade DowngradeErrorMessage="Uma versao mais recente do SoundUp ja esta instalada."
+                  Schedule="afterInstallInitialize" />
+
+    <MediaTemplate EmbedCab="yes" />
+    <Icon Id="SoundUpIcon" SourceFile="$(var.SolutionDir)\installer\wix\soundup.ico" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)\installer\wix\license.rtf" />
+
+    <!-- Requirements: Windows 10/11 x64 and Administrator -->
+    <Condition Message="O SoundUp requer uma versao de 64 bits do Windows 10 ou Windows 11.">
+      <![CDATA[VersionNT64 >= 603]]>
+    </Condition>
+    <Condition Message="Voce precisa de privilegios administrativos para instalar o SoundUp.">
+      <![CDATA[Privileged]]>
+    </Condition>
+
+    <!-- Directory Structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="SoundUp">
+          <Directory Id="DRIVERFOLDER" Name="Driver" />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="SoundUp" />
+      </Directory>
+      <Directory Id="DesktopFolder" />
+    </Directory>
+
+    <!-- Components -->
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- Legacy Equalizer APO controller; no kernel driver is required. -->
+      <Component Id="SoundUpLegacyExecutable" Guid="{A1B2C3D4-5E6F-7A8B-9C0D-1E2F3A4B5C6D}" Win64="yes">
+        <File Id="SoundUpLegacyExe"
+              Source="$(var.SolutionDir)\legacy\dist\SoundUp.exe"
+              KeyPath="yes" />
+        <File Id="SoundUpApoSetupScript"
+              Source="$(var.SolutionDir)\legacy\configurar_apo.ps1" />
+      </Component>
+
+      <!-- Registry Settings for Auto-Start and User Defaults -->
+      <Component Id="RegistrySettings" Guid="{C3D4E5F6-7A8B-9C0D-1E2F-3A4B5C6D7E8F}" Win64="yes">
+        <RegistryKey Root="HKLM" Key="Software\SoundUp">
+          <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLFOLDER]" KeyPath="yes" />
+          <RegistryValue Type="string" Name="Version" Value="2.0.6" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+
+    <!-- Start Menu Shortcut -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="{E5F6A7B8-9C0D-1E2F-3A4B-5C6D7E8F9A0B}" Win64="yes">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="SoundUp"
+                  Description="SoundUp - Amplificador de Áudio para Windows"
+                  Icon="SoundUpIcon"
+                  Target="[INSTALLFOLDER]SoundUp.exe"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\SoundUp" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Desktop shortcut -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DesktopApplicationShortcut" Guid="{F6A7B8C9-0D1E-2F3A-4B5C-6D7E8F9A0B1C}" Win64="yes">
+        <Shortcut Id="DesktopShortcut"
+                  Name="SoundUp"
+                  Description="SoundUp - Amplificador de Áudio para Windows"
+                  Icon="SoundUpIcon"
+                  Target="[INSTALLFOLDER]SoundUp.exe"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\SoundUp" Name="desktopShortcut" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Feature Tree -->
+    <Feature Id="ProductFeature" Title="SoundUp" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="DesktopApplicationShortcut" />
+    </Feature>
+
+    <!-- Custom Actions for Default Device Prompt & Rollback -->
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+    </UI>
+
+  </Product>
+</Wix>
