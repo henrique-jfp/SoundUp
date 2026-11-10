@@ -15,7 +15,7 @@
     <b>Ganho analógico puro de até 300%. Sem drivers kernel instáveis. Zero latência perceptível.</b>
   </p>
 
-  <a href="[release/SoundUpSetup.exe](https://github.com/henrique-jfp/SoundUp/releases/latest/download/SoundUpSetup.exe)">
+  <a href="https://github.com/henrique-jfp/SoundUp/releases/latest/download/SoundUpSetup.exe">
     <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_SOUNDUP-SETUP.EXE-2ea44f?style=for-the-badge&logo=windows&logoColor=white" height="42">
   </a>
 
