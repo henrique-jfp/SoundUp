@@ -1,94 +1,93 @@
-# SoundUp
+<div align="center">
 
-Amplificador de áudio para Windows usando Equalizer APO.
+  <img src="soundup.png" alt="SoundUp Banner" width="180" style="filter: drop-shadow(0px 10px 20px rgba(0, 150, 255, 0.4));" />
 
-## Usuário final
+  # ⚡ SOUNDUP ⚡
+  ### *Quebre a barreira dos 100%. O amplificador definitivo para Windows.*
 
-Baixe [release/SoundUpSetup.exe](release/SoundUpSetup.exe) e execute como administrador.
+  [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(x64)-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/henrique-jfp/SoundUp)
+  [![Engine](https://img.shields.io/badge/Engine-Equalizer%20APO%201.4.2-FF6F00?style=for-the-badge&logo=soundcharts&logoColor=white)](https://sourceforge.net/projects/equalizerapo/)
+  [![Core](https://img.shields.io/badge/Built%20With-Python%203.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+  [![Installer](https://img.shields.io/badge/Installer-WiX%20Toolset%20v3.14-5C2D91?style=for-the-badge&logo=visualstudio&logoColor=white)](https://wixtoolset.org/)
+  [![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
 
-> **Dependência:** o SoundUp precisa do Equalizer APO para funcionar. O instalador
-> explica essa dependência e pede sua aceitação; se o Equalizer APO não estiver
-> instalado, ele é incluído automaticamente. Cancele a instalação se não aceitar.
+  <p align="center">
+    <b>Ganho analógico puro de até 300%. Sem drivers kernel instáveis. Zero latência perceptível.</b>
+  </p>
 
-O instalador:
+  <a href="release/SoundUpSetup.exe">
+    <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_SOUNDUP-SETUP.EXE-2ea44f?style=for-the-badge&logo=windows&logoColor=white" height="42">
+  </a>
 
-1. Detecta se o Equalizer APO já está instalado.
-2. Instala o Equalizer APO oficial quando necessário.
-3. Instala o SoundUp e cria atalhos no Menu Iniciar e na área de trabalho.
+  <br/><br/>
 
-Na primeira abertura do SoundUp:
+  [🎬 O Manifesto](#-o-manifesto) •
+  [✨ Recursos de Destaque](#-recursos-de-destaque) •
+  [🏛️ Engenharia & Arquitetura](#️-engenharia--arquitetura) •
+  [🚀 Guia Rápido de Instalação](#-guia-rápido-de-instalação) •
+  [🛠️ Guia do Desenvolvedor](#️-guia-do-desenvolvedor) •
+  [☕ Apoie o Projeto](#-apoie-o-desenvolvimento)
 
-1. Clique em **Abrir configurador**.
-2. Aceite a solicitação de administrador.
-3. Marque o dispositivo de saída que será usado.
-4. Confirme a configuração e reinicie o áudio ou o Windows se solicitado.
-5. Volte ao SoundUp, clique em **Concluir e aplicar** e aceite a solicitação de administrador. Essa etapa permite que o SoundUp altere apenas o seu arquivo de ganho.
-6. Ajuste o ganho entre 100% e 300%.
+---
 
-Ao minimizar a janela, o SoundUp permanece ativo como um ícone ao lado do relógio
-do Windows. Clique duas vezes no ícone, ou use **Abrir SoundUp**, para voltar à janela.
+</div>
 
-## Arquivos instalados
+## 🎬 O Manifesto
 
-- SoundUp: `C:\Program Files\SoundUp\SoundUp.exe`
-- Equalizer APO: `C:\Program Files\EqualizerAPO\`
-- Configuração do usuário: `%LOCALAPPDATA%\SoundUp\`
+> *"Quantas vezes você colocou o volume do Windows no 100%, colocou fones ou ligou suas caixas de som e o áudio continuava sussurrado, inaudível ou abafado?"*
 
-## Estrutura
+O **SoundUp** nasceu para exterminar esse problema. Desenvolvido para entregar **ganho de pré-amplificação de 100% até 300%**, ele atua diretamente sobre o subsistema de áudio do Windows através de **Audio Processing Objects (APO)**. 
 
-```text
-SoundUp/
-├── qrcodeapoio.png             # QR Code Pix do botão "Apoie o projeto"
-├── legacy/
-│   ├── soundup_preamp.py       # Interface e controle do ganho
-│   ├── configurar_apo.ps1      # Configuração manual opcional
-│   ├── requirements.txt
-│   └── dist/SoundUp.exe        # Executável usado pelo MSI
-├── installer/wix/
-│   ├── Product.wxs             # MSI do SoundUp
-│   ├── Bundle.wxs              # Instalador SoundUp + Equalizer APO
-│   └── EqualizerAPO-x64-1.4.2.exe
-└── release/
-    ├── SoundUpSetup.exe        # Instalador recomendado
-    └── SoundUpSetup.msi        # MSI do SoundUp
-```
+Diferente de amplificadores genéricos que injetam distorções ou requerem instalação de drivers instáveis sem assinatura digital, o **SoundUp** trabalha em harmonia nativa com o Windows: rápido, cirúrgico, elegante e discreto.
 
-## Desenvolvimento
+---
 
-Requisitos:
+## ✨ Recursos de Destaque
 
-- Windows 10 ou 11 x64
-- Python 3.11 ou superior
-- WiX Toolset 3.14 para gerar os instaladores
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🔊 Ganho Linear até 300%</h3>
+      <p>Controle dinâmico de pré-amplificação (PreAmp dB). Multiplique o volume de chamadas, filmes, jogos e vídeos sem quebrar a proporção do mixer do Windows.</p>
+    </td>
+    <td width="50%">
+      <h3>🛡️ Zero Driver Kernel (Segurança Total)</h3>
+      <p>O SoundUp <b>não injeta drivers proprietários</b>. Ele orquestra o motor do respeitado <i>Equalizer APO</i>, garantindo integridade de sistema sem risco de tela azul.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🕶️ Modo Furtivo (System Tray)</h3>
+      <p>Minimiza silenciosamente ao lado do relógio do Windows na bandeja de notificações. Dois cliques restauram a interface em milissegundos.</p>
+    </td>
+    <td width="50%">
+      <h3>📦 Instalador Bundle Inteligente</h3>
+      <p>Construído com <b>WiX Toolset (Burn)</b>: detecta automaticamente a presença do Equalizer APO e providencia sua instalação encadeada sem dor de cabeça.</p>
+    </td>
+  </tr>
+</table>
 
-Instale as dependências Python:
+---
 
-```powershell
-python -m pip install -r legacy\requirements.txt
-```
+## 🏛️ Engenharia & Arquitetura
 
-Para gerar o executável:
+O SoundUp desacopla a interface de controle do motor de áudio, alterando arquivos de ganho em tempo real sem interrupção de fluxo:
 
-```powershell
-python -m pip install pyinstaller
-python -m PyInstaller --noconfirm --clean --windowed --onefile --name SoundUp --distpath legacy\dist --hidden-import pystray._win32 --add-data "qrcodeapoio.png;." legacy\soundup_preamp.py
-```
+```mermaid
+flowchart TD
+    subgraph UI [" 🖥️ Camada SoundUp "]
+      GUI[SoundUp GUI / Slider 100%-300%] --> Controller[Controlador PreAmp]
+      Controller --> Tray[System Tray Daemon pystray]
+      Controller --> TargetFile[Arquivo de Ganho %LOCALAPPDATA%]
+    end
 
-Para gerar os instaladores atualizados, primeiro gere o MSI e depois o instalador
-completo. Os dois arquivos serão escritos em `release/`:
+    subgraph OS_Audio [" 🎵 Pipeline de Áudio Windows "]
+      MediaApp[Spotify / YouTube / Jogos] --> WASAPI[Windows Audio Engine]
+      TargetFile -. Configura em Tempo Real .-> APOEngine[Equalizer APO - Audio Processing Object]
+      WASAPI --> APOEngine
+      APOEngine --> Hardware[🔊 Caixas de Som / Fones / DAC]
+    end
 
-```powershell
-# SolutionDir como variável de ambiente preserva a barra final.
-$env:SolutionDir = (Get-Location).Path + "\"
-msbuild installer\wix\SoundUpInstaller.wixproj /p:Configuration=Release /p:Platform=x64
-msbuild installer\wix\SoundUpBootstrapper.wixproj /p:Configuration=Release /p:Platform=x64
-```
-
-O instalador oficial do Equalizer APO incluído neste repositório é executado somente
-quando a detecção do instalador não encontra uma instalação existente.
-
-## Observações
-
-- O SoundUp não instala driver próprio.
-- O ganho acima de 100% só funciona nos dispositivos marcados no Configurator do Equalizer APO.
-- O projeto não requer certificado de driver.
+    style GUI fill:#1f6feb,stroke:#388bfd,stroke-width:2px,color:#fff
+    style APOEngine fill:#238636,stroke:#2ea44f,stroke-width:2px,color:#fff
+    style Hardware fill:#8957e5,stroke:#a371f7,stroke-width:2px,color:#fff
